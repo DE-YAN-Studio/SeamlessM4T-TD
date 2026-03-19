@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Conda / virtualenv
+.conda/
+env/
+venv/
+
+# Audio temp files
+temp/
+td/work/
+
+# HuggingFace cache
+.cache/
+
+# Env state
+.env_mode
+
+# OS
+.DS_Store
+Thumbs.db
