@@ -83,7 +83,14 @@ def tts(req: TTSRequest):
 @app.post("/asr")
 def asr(audio: UploadFile = File(...)):
     audio_bytes  = audio.file.read()
-    audio_array, sample_rate = sf.read(io.BytesIO(audio_bytes))
+    if not audio_bytes:
+        raise HTTPException(400, "Received empty audio file — recording may not have flushed yet")
+    try:
+        audio_array, sample_rate = sf.read(io.BytesIO(audio_bytes))
+    except Exception:
+        rate, data = scipy.io.wavfile.read(io.BytesIO(audio_bytes))
+        audio_array = data.astype(np.float32) / np.iinfo(data.dtype).max if np.issubdtype(data.dtype, np.integer) else data.astype(np.float32)
+        sample_rate = rate
 
     # Convert to mono
     if len(audio_array.shape) > 1:

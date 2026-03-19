@@ -9,7 +9,7 @@
 #
 # Requirements:
 #   - Audio File In CHOP named "tts_out" connected to an Audio Device Out CHOP
-#   - Record CHOP named "mic_record" connected to your microphone Audio Device In CHOP
+#   - Audio File Out CHOP named "mic_record" receiving audio from your Audio Device In CHOP
 #     - Set its File parameter to the RECORD_FILE path below
 #   - Text DAT named "asr_result" to display transcriptions
 #   - The server must be running (start_server.bat)
@@ -112,10 +112,15 @@ def stop_and_transcribe():
     """
     Stop recording and transcribe the audio. Runs in a background thread — TD will not freeze.
     Result is written to the Text DAT named asr_result.
+    Waits a few frames after stopping so the Audio File Out CHOP can flush to disk.
     """
     op(MIC_CHOP).par.record = 0
     print("[SeamlessM4T-ASR] Recording stopped. Transcribing...")
+    this_path = op(me).path
+    run(f"op('{this_path}').module._dispatch_asr()", delayFrames=6)
 
+
+def _dispatch_asr():
     global _counter
     _counter += 1
     job_id    = _counter
