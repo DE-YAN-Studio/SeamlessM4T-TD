@@ -38,7 +38,7 @@ All AI models must be from Meta/Facebook. Do not suggest or introduce models fro
 
 ## TouchDesigner Operator Names
 - `tts_out` — Audio File In CHOP for TTS playback
-- `mic_record` — Record CHOP for mic input, file set to `td/work/mic_input.wav`
+- `mic_record` — Audio File Out CHOP for mic input, file set to `td/work/mic_input.wav`
 - `asr_result` — Text DAT for transcription output
 - Reload audio CHOP with `chop.par.reloadpulse.pulse()`
 
