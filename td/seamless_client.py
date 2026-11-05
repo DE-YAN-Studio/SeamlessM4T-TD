@@ -22,7 +22,7 @@ SERVER_URL  = "http://127.0.0.1:8766"
 TTS_CHOP    = "tts_out"
 MIC_CHOP    = "mic_record"
 RESULT_DAT  = "asr_result"
-RECORD_FILE = "C:/Users/Zach/Desktop/Meta_AI/SeamlessM4T-TD/td/work/mic_input.wav"
+RECORD_FILE = "C:/Users/Zach/Code/Lab & Tools/Meta_AI/SeamlessM4T-TD/td/work/mic_input.wav"
 
 _results = {}
 _counter = 0
